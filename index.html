@@ -1,0 +1,108 @@
+<html>
+    <head>
+        <style type="text/css">
+        *body{
+            background-color: #fdfdfd;
+            overflow: hidden;
+            text-align: center;
+            margin-left: 100px auto;
+        }
+        .flex-dispaly{
+            display: flex;
+            align-self: center;
+        }
+        .video-content{
+            overflow: hidden;
+            height: auto;
+            display: -ms-flexbox;
+            display: -webkit-flex;
+            display: flex;
+            -ms-flex-align: center;
+            -webkit-align-items:center;
+            -webkit-box-align: center;
+            align-items: center;
+            margin-left: 33%;
+            margin-right: auto;
+        }
+        .wide-screen{
+            min-width: auto;
+            min-height: auto;
+        }
+        .tall-screen{
+            min-height: auto;
+        }
+        #bgvid{
+            min-width: auto;
+            min-height: auto;
+        }
+        
+        </style>
+        <link rel="stylesheet" type= "text/css" href="style.css" />
+    </head>
+    <body onload="onload();" style="text-align:center">
+        <script src="template.js"></script>
+        <div class="flex-display">
+            <div class="video-content">
+                <video id="idle_video" id="bgvid" class="tall-screen wide-screen" playsinline preload controls height="auto" autoplay="true" width="auto" onended="onVideoEnded();">
+                </video>
+                <script>
+                    var video_list = ["1.mp4", "2.mp4", "3.mp4", "4.mp4"];
+                    var video_index = 0;
+                    var video_player = null;
+                    var i = 0;
+                    vidlen = video_list.length
+                    function onload(){
+                        console.log("body loaded");
+                        video_player = document.getElementById("idle_video");
+                        video_player.setAttribute("src", video_list[video_index]);
+                        video_player.play()
+                    }
+                    function onVideoEnded(){
+                        console.log("video ended");
+                        if(video_index < video_list.length -1){
+                            video_index++;
+                        }
+                        else{
+                            video_index =0;
+                        }
+                    video_player.setAttribute("src", video_list[video_index]);
+                    video_player.play();
+                    }
+                    var vidElement = document.getElementById("idle_video");
+                    function nxt()
+                            {
+                                if(i < vidLen-1)
+                                    {
+                                        i++;
+                                    }
+                                else{
+                                        i=0;                
+                                    }
+
+                                    vidElement.src = video_list[i];                    
+                            }
+
+                            function prvs()
+                            {
+                                if(i > 0)
+                                    {
+                                        i--;
+                                    }
+                                else
+                                {
+                                    i = vidLen-1;
+                                }
+                                    vidElement.src = video_list[i];                    
+                            }
+                </script>
+
+            </div>
+
+        </div>
+        <div>
+            <button onclick="prvs()" id="prevVideo" style="margin-right:55px;">Prev</button>
+            <button onclick="nxt()" id="nextVideo" style="margin-right:55px;" >Next</button>
+        </div>
+        
+    </body>
+</html>
